@@ -48,19 +48,19 @@ spec:
                             git config --global --add safe.directory /home/jenkins/agent/workspace/lumi-manifests
                             git remote set-url origin $GIT_REPO_URL
 
-                            # ✅ SSH 디렉토리 및 known_hosts 등록
+                            #  SSH 디렉토리 및 known_hosts 등록
                             mkdir -p ~/.ssh
                             chmod 700 ~/.ssh
                             ssh-keyscan github.com >> ~/.ssh/known_hosts
                             chmod 644 ~/.ssh/known_hosts
 
-                            # ✅ 최신 main 브랜치 가져오기
+                            #  최신 main 브랜치 가져오기
                             git fetch origin main
                             git checkout main
                             git pull origin main
                         '''
                     }
-                    echo "📦 Checked out main branch"
+                    echo " Checked out main branch"
                     echo "DOCKER_IMAGE_VERSION: ${params.DOCKER_IMAGE_VERSION}"
                     echo "DID_BUILD_APP: ${params.DID_BUILD_APP}"
                     echo "DID_BUILD_API: ${params.DID_BUILD_API}"
@@ -110,7 +110,7 @@ spec:
                             git add .
                             git commit -m "chore: update image tag $DOCKER_IMAGE_VERSION" || echo "No changes to commit"
 
-                            # ✅ SSH 재등록 (Pod은 매번 새로 뜨니까)
+                            #  SSH 재등록 (Pod은 매번 새로 뜨니까)
                             mkdir -p ~/.ssh
                             chmod 700 ~/.ssh
                             ssh-keyscan github.com >> ~/.ssh/known_hosts
@@ -126,10 +126,11 @@ spec:
 
     post {
         success {
-            echo "✅ Manifests updated successfully and pushed to GitHub"
+            echo " Manifests updated successfully and pushed to GitHub"
         }
         failure {
-            echo "❌ Failed to update manifests"
+            echo " Failed to update manifests"
         }
     }
 }
+
