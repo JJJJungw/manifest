@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: amicitia/lumi-frontend:100
+          image: amicitia/lumi-specguard:100
           ports:
             - containerPort: 80
           resources:
@@ -38,3 +38,4 @@ spec:
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 10
+
